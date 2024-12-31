@@ -1,0 +1,20 @@
+CREATE TABLE books (
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    author TEXT,
+    cover_url TEXT,
+    published_date TEXT,
+    subjects TEXT -- Comma-separated list of subjects
+);
+
+-- Query to select books by subject with pagination
+selectBooksBySubjectWithLimit:
+SELECT *
+FROM books
+WHERE subjects LIKE '%' || ? || '%'
+LIMIT ? OFFSET ?;
+
+-- Insert or replace a book
+insertBook:
+INSERT OR REPLACE INTO books (id, title, author, cover_url, published_date, subjects)
+VALUES (?, ?, ?, ?, ?, ?);
